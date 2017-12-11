@@ -7,5 +7,7 @@ public class HelloWorld {
 
 		System.out.println("æ»≥Á«œººø‰");
 	}
-
+	public int sum() {
+		return 3+5;
+	}
 }

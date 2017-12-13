@@ -78,32 +78,47 @@ public class page1 extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("\uC81C\uD488\uBA85");
 		lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 15));
+		
+		JLabel lblname = new JLabel("\u25CB\u25CB\uC640\uC778");
+		
+		JLabel lblNewLabel_4 = new JLabel("\uC81C\uD488 \uAC04\uB2E8 \uC124\uBA85");
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addComponent(btn3)
-					.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
 					.addComponent(btn4))
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(23)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addComponent(txt1, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel))
-					.addContainerGap(23, Short.MAX_VALUE))
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGap(14))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(23)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(txt1, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel)
+							.addGap(64)
+							.addComponent(lblname)))
+					.addContainerGap(29, Short.MAX_VALUE))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(34)
+					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(58, Short.MAX_VALUE))
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel)
+						.addComponent(lblname))
+					.addGap(37)
+					.addComponent(lblNewLabel_4)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txt1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+					.addComponent(txt1, GroupLayout.PREFERRED_SIZE, 262, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
 					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
@@ -181,6 +196,9 @@ public class page1 extends JFrame {
 					.addComponent(txt5, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		
+		JLabel lblImage = new JLabel("image");
+		panel_4.add(lblImage);
 		panel.setLayout(gl_panel);
 	}
 }

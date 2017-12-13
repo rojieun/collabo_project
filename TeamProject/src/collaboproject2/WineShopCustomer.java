@@ -8,17 +8,21 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.JButton;
 
-public class WineShopCustomer extends JFrame {
+public class WineShopCustomer extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
-	private JTextField txtWelcomeToWineshop;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtid;
+	private JTextField txtpw;
+	private JTextField txtage;
+	private JButton btncheck, btnsignup;
 
 	/**
 	 * Launch the application.
@@ -50,12 +54,10 @@ public class WineShopCustomer extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		txtWelcomeToWineshop = new JTextField();
-		txtWelcomeToWineshop.setFont(new Font("Andalus", Font.PLAIN, 16));
-		txtWelcomeToWineshop.setHorizontalAlignment(SwingConstants.CENTER);
-		txtWelcomeToWineshop.setText("Welcome to Wine Shop");
-		panel.add(txtWelcomeToWineshop);
-		txtWelcomeToWineshop.setColumns(13);
+		JLabel lblNewLabel_3 = new JLabel("Welcome to Wine Shop");
+		lblNewLabel_3.setFont(new Font("Bookman Old Style", Font.PLAIN, 15));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblNewLabel_3);
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -66,27 +68,44 @@ public class WineShopCustomer extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblNewLabel);
 		
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(10);
+		txtid = new JTextField();
+		panel_1.add(txtid);
+		txtid.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Password");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 14));
 		panel_1.add(lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
+		txtpw = new JTextField();
+		panel_1.add(txtpw);
+		txtpw.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Age");
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblNewLabel_2);
 		
-		textField_2 = new JTextField();
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
+		txtage = new JTextField();
+		panel_1.add(txtage);
+		txtage.setColumns(10);
+		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.SOUTH);
+		
+		btncheck = new JButton("조회");
+		panel_2.add(btncheck);
+		
+		btnsignup = new JButton("가입");
+		panel_2.add(btnsignup);
+		
+		btnsignup.addActionListener(this);
+		btncheck.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton btn=(JButton) e.getSource();
 	}
 
 }

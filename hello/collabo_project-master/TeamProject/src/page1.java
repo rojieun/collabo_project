@@ -42,7 +42,6 @@ public class page1 extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -206,7 +205,7 @@ public class page1 extends JFrame {
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
+			gl_panel.createParallelGroup(Alignment.TRAILING)\
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(lb1)
 					.addPreferredGap(ComponentPlacement.UNRELATED)

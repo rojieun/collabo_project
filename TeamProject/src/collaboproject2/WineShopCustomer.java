@@ -128,7 +128,7 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 				JOptionPane.showConfirmDialog(this, "저희 쇼핑몰에서는 미성년자에게 술을 판매하지 않습니다");
 			}
 		}else if(btn==btnlogin) {
-			System.out.println("login");
+		
 			//회원 정보에 있으면 
 			//로그인 되고 다음 화면으로 넘어가게
 			String id=txtid.getText();
@@ -136,12 +136,12 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 			vo=dao.getRow(id);
 			//id조회 가능하고
 			if(vo!=null) {
-				System.out.println("null??");
+				
 				//입력한 id, pw가 DB에 있는 것과 같다면
 				if(vo.getId().equals(id)) { //text...equals...쓰자.. 
-					System.out.println("nn");
+				
 					if( vo.getPw().equals(pw))	{
-						System.out.println("외");
+						
 						JOptionPane.showConfirmDialog(this, "로그인 성공");
 					}}
 			}else {

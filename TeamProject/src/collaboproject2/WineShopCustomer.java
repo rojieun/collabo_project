@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -22,7 +23,7 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 	private JTextField txtid;
 	private JTextField txtpw;
 	private JTextField txtage;
-	private JButton btncheck, btnsignup;
+	private JButton btnlogin, btnsignup;
 
 	/**
 	 * Launch the application.
@@ -93,19 +94,61 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 		
-		btncheck = new JButton("조회");
-		panel_2.add(btncheck);
+		btnlogin = new JButton("로그인");
+		panel_2.add(btnlogin);
 		
 		btnsignup = new JButton("가입");
 		panel_2.add(btnsignup);
 		
 		btnsignup.addActionListener(this);
-		btncheck.addActionListener(this);
+		btnlogin.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn=(JButton) e.getSource();
+		WineShopDao dao=new WineShopDao();
+		WineShopVO vo=new WineShopVO();
+		if(btn==btnsignup) {
+			//회원가입 버튼 누를 시
+			//회원가입 -> user add
+			//비밀번호 안 보이게 개선해야함
+			String id=txtid.getText();
+			String pw=txtpw.getText();
+			int age=Integer.parseInt(txtage.getText());
+			if(age>20) {
+			int result=dao.userInsert(id, pw, age);
+			
+			if(result>0) {
+				JOptionPane.showConfirmDialog(this, "회원가입 성공");
+			}else {
+				JOptionPane.showConfirmDialog(this, "회원가입 실패");
+			}}
+			else {
+				JOptionPane.showConfirmDialog(this, "저희 쇼핑몰에서는 미성년자에게 술을 판매하지 않습니다");
+			}
+		}else if(btn==btnlogin) {
+			System.out.println("login");
+			//회원 정보에 있으면 
+			//로그인 되고 다음 화면으로 넘어가게
+			String id=txtid.getText();
+			String pw=txtpw.getText();
+			vo=dao.getRow(id);
+			//id조회 가능하고
+			if(vo!=null) {
+				System.out.println("null??");
+				//입력한 id, pw가 DB에 있는 것과 같다면
+				if(vo.getId().equals(id)) { //text...equals...쓰자.. 
+					System.out.println("nn");
+					if( vo.getPw().equals(pw))	{
+						System.out.println("외");
+						JOptionPane.showConfirmDialog(this, "로그인 성공");
+					}}
+			}else {
+				JOptionPane.showConfirmDialog(this, "아이디나 패스워드가 맞지 않습니다");
+			}
+		}
+		
 	}
 
 }

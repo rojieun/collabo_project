@@ -116,6 +116,7 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 			String id=txtid.getText();
 			String pw=txtpw.getText();
 			int age=Integer.parseInt(txtage.getText());
+			//20세 이상이어야 회원가입 가능하게
 			if(age>20) {
 			int result=dao.userInsert(id, pw, age);
 			
@@ -135,6 +136,8 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 			String pw=txtpw.getText();
 			vo=dao.getRow(id);
 			//id조회 가능하고
+			//이후 추가: master경우 관리자 페이지로 넘어가게
+			//일반 회원인 경우 쇼핑몰로 넘어가게
 			if(vo!=null) {
 				
 				//입력한 id, pw가 DB에 있는 것과 같다면

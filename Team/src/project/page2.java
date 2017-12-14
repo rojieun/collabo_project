@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicEditorPaneUI;
+import javax.swing.plaf.basic.BasicSliderUI;
+
+import com.jgoodies.forms.layout.ConstantSize;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JInternalFrame;
@@ -16,9 +20,17 @@ import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JSlider;
@@ -27,9 +39,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JSeparator;
 import java.awt.CardLayout;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.JSpinner;
+import java.awt.GridBagLayout;
 
-public class page2 extends JFrame implements ActionListener{
+public class page2 extends JFrame implements ActionListener,MouseListener{
 
 	private JPanel contentPane;
 	private JLabel lblcontury,lblsweet,lblbody,lblprice;
@@ -38,10 +54,12 @@ public class page2 extends JFrame implements ActionListener{
 	private JComboBox categorycbB;
 	private JScrollPane scrollPane;
 	private JLabel lbl[];
-	private JPanel panel_2;
+	private JPanel main_panel;
+
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,6 +76,9 @@ public class page2 extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
+	
+	//http://blog.naver.com/battledocho/220006953063 각종 명령어 뜻
+	
 	public page2() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,6 +92,7 @@ public class page2 extends JFrame implements ActionListener{
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
 		
 		JPanel panel = new JPanel();
 		scrollPane.setColumnHeaderView(panel);
@@ -106,17 +128,26 @@ public class page2 extends JFrame implements ActionListener{
 		pricecbB = new JComboBox();
 		panel.add(pricecbB);
 		
-		panel_2 = new JPanel();
-		scrollPane.setViewportView(panel_2);
-		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
+		main_panel = new JPanel();
+		scrollPane.setViewportView(main_panel);
+		main_panel.setLayout(new GridLayout(3, 3, 0, 0));
 		
+		/*//참조 https://blog.naver.com/gjduddnr5923/140181030248
+		GridBagConstraints constraint = new GridBagConstraints(); 
+		GridBagLayout gbl_main_panel = new GridBagLayout();
+		gbl_main_panel.columnWidths = new int[] {2};
+		gbl_main_panel.rowHeights = new int[] {2};
+		gbl_main_panel.columnWeights = new double[]{Double.MIN_VALUE};
+		gbl_main_panel.rowWeights = new double[]{Double.MIN_VALUE};
+		main_panel.setLayout(gbl_main_panel);
+		constraint.fill=GridBagConstraints.BOTH;
+        constraint.weightx = 1.0;
+        constraint.gridwidth = 1;  //REMAINDER = 이 구성 요소가 열이나 행의 마지막 구성 요소임을 지정합니다.
+        constraint.gridheight = 1;
+        constraint.weighty = 1;*/
 		
-		lbl = new JLabel[15];
-		for(int i=0; i<lbl.length;i++) {
-			lbl[i]=new JLabel("No image");
-			panel_2.add(lbl[i],panel.CENTER_ALIGNMENT);
-		}					// 선택된 JcomboBox의 조건에 따라 이미지가 조회됨.
-		
+		image();
+
 		String[] sweetList = {"1","2","3","4","5","모든 "};
 		for(int i=0;i<sweetList.length;i++) {
 		sweetcbB.addItem(sweetList[i]+"단계");
@@ -137,20 +168,84 @@ public class page2 extends JFrame implements ActionListener{
 		for(int m=0;m<categoryList.length;m++) {
 			categorycbB.addItem(categoryList[m]);
 			
-			
-			//이미지 크기 고정화
-			//이미지가 화면 밖으로 넘어갈 시 스크롤 활성화
 		}
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	// 선택된 JcomboBox의 조건에 따라 이미지가 조회됨.	
+	public void actionPerformed(MouseEvent e) {
 		//DB에서 데이터를 받아와 JcomboBox랑 연동
 		//이미지를 데이터에 맞게 값 조정
 		//이미지를 누르면 (해당 라벨) 정보창으로 넘어가는 메소드
 		
 		
-		
 	}
 
+	
+
+	public void image() {
+		lbl = new JLabel[90];
+		for(int i=0; i<lbl.length;i++) {
+			lbl[i]=new JLabel("No image");
+			int width = lbl[i].getWidth(); 
+			int height = lbl[i].getHeight();
+			lbl[i].setSize(width, height);
+			main_panel.add(lbl[i],main_panel.CENTER_ALIGNMENT);
+			lbl[i].addMouseListener((MouseListener) this);
+			
+		}//for문
+		
+		/*lbl[i].addComponentListener(new ComponentListener() {
+			@Override
+			public void componentShown(ComponentEvent e) {		
+			}
+			@Override
+			public void componentResized(ComponentEvent e) {
+				ImageIcon icon = new ImageIcon();
+				Image img = icon.getImage();
+				try {
+					//lbl[i].setSize(width, height);
+				//getScaledInstance	이미지 유지해서 가져오기
+				lbl[i].setIcon(new ImageIcon(img.getScaledInstance(width, height,Image.SCALE_SMOOTH)));
+				panel_2.add(lbl[i]);
+				//SCALE_SMOOTH = 속도보다 화질 우선 / SCALE_FAST = 화질보다 속도 우선
+				} catch(NullPointerException a) {}
+				}
+			@Override
+			public void componentMoved(ComponentEvent e) {
+			}
+			@Override
+			public void componentHidden(ComponentEvent e) {				
+			}
+		});*/
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {		 
+				page1 page1 = new page1();
+				page1.setVisible(true);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {}	
 }
+
+
+
+
+/*@Override
+public void mouseClicked(MouseEvent e) {
+	// TODO Auto-generated method stub
+	page1 page1 = new page1();
+	page1.setVisible(true);
+}*/

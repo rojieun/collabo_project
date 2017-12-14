@@ -19,6 +19,9 @@ import javax.swing.JScrollBar;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import java.awt.Font;
+import javax.swing.JSeparator;
+import java.awt.Color;
+import javax.swing.JProgressBar;
 
 public class page1 extends JFrame {
 
@@ -166,31 +169,31 @@ public class page1 extends JFrame {
 		JPanel panel_4 = new JPanel();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(txt5, GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE))
+							.addComponent(txt5, GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(299)
 							.addComponent(lb1)
 							.addGap(16))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 620, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(295)
-							.addComponent(lb2)))
+							.addComponent(lb2))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 620, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(lb1)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(18)
+					.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+					.addGap(90)
 					.addComponent(lb2)
 					.addGap(10)
 					.addComponent(txt5, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)

@@ -45,6 +45,7 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public WineShopCustomer() {
+		setTitle("WineShop");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 453, 236);
 		contentPane = new JPanel();
@@ -140,13 +141,21 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 			//일반 회원인 경우 쇼핑몰로 넘어가게
 			if(vo!=null) {
 				
-				//입력한 id, pw가 DB에 있는 것과 같다면
-				if(vo.getId().equals(id)) { //text...equals...쓰자.. 
-				
-					if( vo.getPw().equals(pw))	{
-						
-						JOptionPane.showConfirmDialog(this, "로그인 성공");
+				//입력한 id, pw가 master 라면
+				if(vo.getId().equals("master")) { //text...equals...쓰자.. 
+					if(vo.getPw().equals("12345")){
+						//관리자 계정 로그인된 경우
+						//관리 페이지로 이동
+						WineShopMasterId master=new WineShopMasterId();
+						master.setVisible(true);
 					}}
+				//입력한 id, pw가 customer라면
+				else if( vo.getId().equals(id))	{
+					if(vo.getPw().equals(pw))
+						JOptionPane.showConfirmDialog(this, "로그인 성공");
+					}
+				 
+			
 			}else {
 				JOptionPane.showConfirmDialog(this, "아이디나 패스워드가 맞지 않습니다");
 			}

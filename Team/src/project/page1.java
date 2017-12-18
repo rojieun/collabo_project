@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
@@ -23,13 +26,14 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JProgressBar;
 
-public class page1 extends JFrame {
+public class page1 extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private JTextField txt2;
 	private JTextField txt3;
 	private JTextField txt1;
 	private JTextField txt5;
+	private JButton btn1,btn2,btn3,btn4;
 
 	/**
 	 * Launch the application.
@@ -61,18 +65,18 @@ public class page1 extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		JButton btn1 = new JButton("\uC8FC\uBB38");
+		btn1 = new JButton("\uC8FC\uBB38");
 		panel_1.add(btn1);
 		
-		JButton btn2 = new JButton("\uCDE8\uC18C");
+		btn2 = new JButton("\uCDE8\uC18C");
 		panel_1.add(btn2);
 		
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.EAST);
 		
-		JButton btn3 = new JButton("\uC7A5\uBC14\uAD6C\uB2C8 \uB2F4\uAE30");
+		btn3 = new JButton("\uC7A5\uBC14\uAD6C\uB2C8 \uB2F4\uAE30");
 		
-		JButton btn4 = new JButton("\uC7A5\uBC14\uAD6C\uB2C8 \uCDE8\uC18C");
+		btn4 = new JButton("\uC7A5\uBC14\uAD6C\uB2C8 \uCDE8\uC18C");
 		
 		JPanel panel_3 = new JPanel();
 		
@@ -203,5 +207,31 @@ public class page1 extends JFrame {
 		JLabel lblImage = new JLabel("image");
 		panel_4.add(lblImage);
 		panel.setLayout(gl_panel);
+		
+		btn1.addActionListener(this);
+		btn2.addActionListener(this);
+		btn3.addActionListener(this);
+		btn4.addActionListener(this);
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+			JButton btn = (JButton) e.getSource();
+			
+			if(btn == btn2) {
+				dispose();
+			}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }

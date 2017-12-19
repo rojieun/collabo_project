@@ -223,8 +223,7 @@ public class page2 extends JFrame implements ActionListener,MouseListener{
 
 		Object jbx = e.getSource();
 		
-		if(categorycbB.getSelectedItem().equals("화이트와인")) {
-				
+		if(categorycbB.getSelectedItem().equals("화이트와인")) {		
 			image(1);
 		}
 		}

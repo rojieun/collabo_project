@@ -187,7 +187,7 @@ public class page1 extends JFrame implements ActionListener{
 							.addGap(295)
 							.addComponent(lb2))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
+							.addGap(21)
 							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 620, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);

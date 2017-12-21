@@ -12,7 +12,7 @@ import java.util.Vector;
 
 
 public class WineShopDao {
-	//BOOKTBL 접속, 채헤, 삽입, 삭제, 조회, 수정 작업 담당
+	//wineshopTBL 접속, 채헤, 삽입, 삭제, 조회, 수정 작업 담당
 	public Connection getConnection() {
 		Connection con=null;
 		try {

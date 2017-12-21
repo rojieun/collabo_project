@@ -21,11 +21,11 @@ public class WineShopMasterId extends JFrame implements ActionListener{
 	private JTable table;
 	private JButton btnaccount, btnok;
 	private JButton btnproduct;
-//회원관리 클래스. 물품조회 클래스는 따로 연동.
-//WineShopCustomer에서 관리자가 로그인 시 연동됨
-//회원 당 구매기록 확인, 제품 조회 
-//jtable로
-//단독으로 사용하지 않기에 main없음
+	//회원관리 클래스. 물품조회 클래스는 따로 연동.
+	//WineShopCustomer에서 관리자가 로그인 시 연동됨
+	//회원 당 구매기록 확인, 제품 조회 
+	//jtable로
+	//단독으로 사용하지 않기에 main없음
 	/**
 	 * Create the frame.
 	 */

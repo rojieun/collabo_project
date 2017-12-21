@@ -19,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -51,6 +53,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JSplitPane;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 
 
 
@@ -66,8 +69,14 @@ public class page2 extends JFrame implements ActionListener,MouseListener{
 	private JPanel main_panel;
 	private DB db = new DB();
 	private JPanel panel_1;
-	private JTextField textField;
-	private JButton btn;
+	private JTextField SelectField;
+	private JButton btnSel;
+	private boolean flag = true;
+	private String word[] = {"레드와인","화이트와인"};
+	private int pos;
+	private JComboBox comboBox;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -147,12 +156,15 @@ public class page2 extends JFrame implements ActionListener,MouseListener{
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
 		
-		btn = new JButton("\uAC80\uC0C9");
-		panel_1.add(btn);
+		btnSel = new JButton("\uAC80\uC0C9");
+		panel_1.add(btnSel);
 		
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(10);
+		SelectField = new JTextField();
+		panel_1.add(SelectField);
+		SelectField.setColumns(10);
+		
+		comboBox = new JComboBox();
+		panel_1.add(comboBox);
 		
 		
 		
@@ -193,7 +205,7 @@ public class page2 extends JFrame implements ActionListener,MouseListener{
 		//conturycbB.addItemListener(this);
 		categorycbB.addActionListener(this);
 		//categorycbB.addItemListener(this);
-		
+		btnSel.addActionListener(this);
 		
 		
 		//검색창https://blog.naver.com/artisan_ryu/40210625781
@@ -220,13 +232,65 @@ public class page2 extends JFrame implements ActionListener,MouseListener{
 		//DB에서 데이터를 받아와 JcomboBox랑 연동
 		//이미지를 데이터에 맞게 값 조정
 		//이미지를 누르면 (해당 라벨) 정보창으로 넘어가는 메소드
-
+		 Exception ex = new Exception();
 		Object jbx = e.getSource();
+		JButton jbtn = (JButton) e.getSource();
+		boolean flag = true;
 		
 		if(categorycbB.getSelectedItem().equals("화이트와인")) {		
 			image(1);
 		}
+		
+		if(categorycbB.getSelectedItem().equals("로제와인")) {
+			image(5);
 		}
+
+		if(btnSel==jbtn) {
+		  try{
+
+		   // 입력창에 뭐든지 들어갔을 경우
+
+		   if(!SelectField.getText().equals("")){
+
+		    for(int i=0; i<word.length; i++){
+
+		   // 입력값과 배열이 같을 경우
+
+		     if(SelectField.getText().contains(word[i])){
+		    	 System.out.println("검색");
+
+		     }
+
+		    }
+
+		    if(flag){
+
+		     //값이 배열과 다를 경우
+		    	
+
+		    }       
+
+		   }
+
+		  // 입력창에 아무것도 들어가지 않을 경우.
+
+		   else{
+
+		    throw ex;
+
+		   }
+
+		  }catch(Exception e1){
+
+
+		   JOptionPane.showMessageDialog(null, "경고");
+
+		  	}
+
+		  }
+		
+		}
+	
 	
 	
 

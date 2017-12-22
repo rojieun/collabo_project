@@ -59,10 +59,14 @@ public class WineShopDao {
 			psmt=con.prepareStatement(sql);
 			rs=psmt.executeQuery();
 			while(rs.next()) { //while문이 제대로 안 돼서 오류났었음
-			String id=rs.getString(1);
-			String pw=rs.getString(2);
-			int age=rs.getInt(3);
-			WineShopVO vo=new WineShopVO(id, pw, age);
+			//숫자는 몇번째 칼럼인지
+			String id=rs.getString(2);
+			//String pw=rs.getString(3);
+			//int age=rs.getInt(4);
+			String purwine=rs.getString(5);
+			int purmoney=rs.getInt(6); 
+			String paytype=rs.getString(7);
+			WineShopVO vo=new WineShopVO(id, purwine, purmoney, paytype);
 			vec.add(vo);
 			}
 		}catch(Exception e) {
@@ -72,7 +76,7 @@ public class WineShopDao {
 		}
 		return vec;
 	}
-	//특정 레코드 조회
+	//특정 레코드 조회 -로그인용
 	public WineShopVO getRow(String id) {
 		Connection con=null;
 		PreparedStatement psmt=null;
@@ -85,11 +89,14 @@ public class WineShopDao {
 			psmt.setString(1, id); //no는 primary key라 하나만 존재하므로
 			rs=psmt.executeQuery(); //while돌릴 필요 없음
 			while(rs.next()) {	
-				int idx=rs.getInt(1);
 				String id1=rs.getString(2);
 				String pw=rs.getString(3);
 				int age=rs.getInt(4);
-				vo=new WineShopVO(idx, id1, pw, age);
+				//String purwine=rs.getString(5);
+				//int purmoney=rs.getInt(6); 
+				//String paytype=rs.getString(7);
+				vo=new WineShopVO(id1, pw, age);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,7 +105,63 @@ public class WineShopDao {
 		}
 		return vo;
 	}
-	
+	//id 조회로 구매와인, 구매액, 결제타입 조회
+//	public WineShopVO getUser(String id) {
+//		Connection con=null;
+//		PreparedStatement psmt=null;
+//		ResultSet rs=null;
+//		WineShopVO vo=null;
+//		try {
+//			con=getConnection();
+//			String sql="select * from wineshoptbl where id=?";
+//			psmt=con.prepareStatement(sql);
+//			psmt.setString(1, id); //no는 primary key라 하나만 존재하므로
+//			rs=psmt.executeQuery(); //while돌릴 필요 없음
+//			while(rs.next()) {	
+//				String id1=rs.getString(2);
+//				//String pw=rs.getString(3);
+//				//int age=rs.getInt(4);
+//				String purwine=rs.getString(5);
+//				int purmoney=rs.getInt(6); 
+//				String paytype=rs.getString(7);
+//				vo=new WineShopVO(id1, purwine, purmoney, paytype);
+//				
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//			dbClose(con, psmt, rs);
+//		}
+//		return vo;
+//	}
+	public Vector<WineShopVO> getUser(String id) {
+		Connection con=getConnection();
+		PreparedStatement psmt=null;
+		ResultSet rs=null;
+		String sql="select * from wineshoptbl where id=?";
+		Vector<WineShopVO> vec=new Vector<>();
+		try {
+			psmt=con.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs=psmt.executeQuery();
+			while(rs.next()) { //while문이 제대로 안 돼서 오류났었음
+			//숫자는 몇번째 칼럼인지
+			String id1=rs.getString(2);
+			//String pw=rs.getString(3);
+			//int age=rs.getInt(4);
+			String purwine=rs.getString(5);
+			int purmoney=rs.getInt(6); 
+			String paytype=rs.getString(7);
+			WineShopVO vo=new WineShopVO(id1, purwine, purmoney, paytype);
+			vec.add(vo);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose(con, psmt, rs);
+		}
+		return vec;
+	}
 	public int userDelete(int no) {
 		PreparedStatement psmt=null;
 		Connection con=getConnection();
@@ -134,17 +197,23 @@ public class WineShopDao {
 		return result;
 	}
 
-
+	//로그인 시 아이디가 생성되는 것
 	public int userInsert(String id, String pw, int age) { //vo에 담아서 넘기는 차이
 		PreparedStatement psmt=null;
 		Connection con=getConnection();
 		String sql="insert into wineshoptbl(id,pw,age) values(?,?,?)";
 		int result=0;
 		try {
+//			String purwine=null;
+//			int purmoney=0;
+//			String paytype=null;
 			psmt=con.prepareStatement(sql);
 			psmt.setString(1, id);
 			psmt.setString(2, pw);
 			psmt.setInt(3, age);
+//			psmt.setString(4, purwine);
+//			psmt.setInt(5, purmoney);
+//			psmt.setString(6, paytype);
 			result=psmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

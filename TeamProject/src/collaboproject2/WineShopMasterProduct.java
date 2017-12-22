@@ -100,31 +100,39 @@ public class WineShopMasterProduct extends JFrame implements ActionListener{
 		//btnchk: 와인조회 버튼, textfield에 wine이름 넣으면 정보를 보여줌
 		if(btn==btnchk) {
 			//와인타입 검색어가 있다면 
-			if(txtwinetype!=null) {
+			//length로 해야 로직이 돌아가서 다시 조회했을 때 뿌려
+			if(txtwinetype.getText().length()>0) {
 			
-			//stackoverflow에서 알아낸 table refresh-우선 새 defaulttable에 담아서 다 지우고
-			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-			tableModel.setRowCount(0);
+			//table refresh-우선 새 defaulttable에 담아서 다 지우고
+			DefaultTableModel model = (DefaultTableModel) table.getModel();
+			model.setRowCount(0);
 			//검색한 와인 정보 보여주기
 			//레드나 타입으로 검색하게
 			//시간이 나면 생각해 보는걸로
-			
-			vo=dao.getRow(txtwinetype.getText());
-			rowData=new Vector<>();
-			rowData.addElement(vo.getNo());
-			rowData.addElement(vo.getName());
-			rowData.addElement(vo.getPrice());
-			rowData.addElement(vo.getCompany());
-			model.addRow(rowData);
-			} else if(txtwinetype==null){
+			String winetype=txtwinetype.getText();
+			dao=new WineDAO();
+			vec=dao.getType(winetype);
+			//타입별 와인 조회
+				for(WineVO vo : vec) {
+					rowData=new Vector<>();
+					rowData.addElement(vo.getNo());
+					rowData.addElement(vo.getName());
+					rowData.addElement(vo.getPrice());
+					rowData.addElement(vo.getCompany());
+					model.addRow(rowData);
+					}
+			} else  {
+				//table refresh-우선 새 defaulttable에 담아서 다 지우고
+				//DefaultTableModel moodel = (DefaultTableModel) table.getModel();
+				model.setRowCount(0);
 				showList();
 			}
 		}else if(btn==btnedit) {
 			//선택된 번호가 있는 와인의 가격을 고친다 -sql가격도 바뀜
 			String price=JOptionPane.showInputDialog("수정할 와인의 가격은");
 			dao.wineUpdate(Integer.parseInt(txtwineno.getText()) , Integer.parseInt(price));
-			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-			tableModel.setRowCount(0);
+			DefaultTableModel model = (DefaultTableModel) table.getModel();
+			model.setRowCount(0);
 			showList();
 		}else if(btn==btndel) {
 			
@@ -138,7 +146,7 @@ public class WineShopMasterProduct extends JFrame implements ActionListener{
 	public void showList() {
 		dao=new WineDAO();
 		vec=dao.getList();
-		//vo
+		
 		for(WineVO vo : vec) {
 			rowData=new Vector<>();
 			rowData.addElement(vo.getNo());

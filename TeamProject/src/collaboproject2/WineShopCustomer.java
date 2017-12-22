@@ -16,14 +16,15 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
 
 public class WineShopCustomer extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private JTextField txtid;
-	private JTextField txtpw;
 	private JTextField txtage;
 	private JButton btnlogin, btnsignup;
+	private JPasswordField txtpw;
 
 	/**
 	 * Launch the application.
@@ -79,9 +80,8 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 14));
 		panel_1.add(lblNewLabel_1);
 		
-		txtpw = new JTextField();
+		txtpw = new JPasswordField();
 		panel_1.add(txtpw);
-		txtpw.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Age");
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -105,6 +105,7 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 		btnlogin.addActionListener(this);
 	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn=(JButton) e.getSource();
@@ -113,9 +114,9 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 		if(btn==btnsignup) {
 			//회원가입 버튼 누를 시
 			//회원가입 -> user add
-			//비밀번호 안 보이게 개선해야함
+			
 			String id=txtid.getText();
-			String pw=txtpw.getText();
+			String pw=txtpw.getPassword().toString();
 			int age=Integer.parseInt(txtage.getText());
 			//20세 이상이어야 회원가입 가능하게
 			if(age>20) {
@@ -134,7 +135,8 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 			//회원 정보에 있으면 
 			//로그인 되고 다음 화면으로 넘어가게
 			String id=txtid.getText();
-			String pw=txtpw.getText();
+			//passwordfield 는 gettext가 안 쓰이는 메소드라서 getpassword(return char) -> tostring
+			String pw=txtpw.getPassword().toString();
 			vo=dao.getRow(id);
 			//id조회 가능하고
 			//이후 추가: master경우 관리자 페이지로 넘어가게
@@ -153,6 +155,7 @@ public class WineShopCustomer extends JFrame implements ActionListener{
 				else if( vo.getId().equals(id))	{
 					if(vo.getPw().equals(pw))
 						JOptionPane.showConfirmDialog(this, "로그인 성공");
+					//이후 추가되는 다른 유저 구매 페이지로 넘어가게 해야
 					}
 				 
 			

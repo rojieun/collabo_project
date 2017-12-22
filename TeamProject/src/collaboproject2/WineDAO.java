@@ -117,35 +117,35 @@ public class WineDAO {
 //		}
 //		return vo;
 //	}
-	
-	public Vector<WineVO> getRow(String type) {
+	//와인 레드, 화이트 등 타입에 따라 조회
+	public Vector<WineVO> getType(String type) {
+		Vector<WineVO> vec=new Vector<>();
 		Connection con=null;
 		PreparedStatement psmt=null;
 		ResultSet rs=null;
-		WineVO vo=null;
-		Vector<WineVO> vec=null;
+		String sql="select * from winetbl where type=?";
+	
 		try {
 			con=getConnection();
-			String sql="select * from winetbl where type=?";
 			psmt=con.prepareStatement(sql);
-			psmt.setString(1, type); //no는 primary key라 하나만 존재하므로
-			rs=psmt.executeQuery(); //while돌릴 필요 없음
-			while(rs.next()) {	
-				int no=rs.getInt(1);
-				String name1=rs.getString(2);
+			psmt.setString(1, type);
+			rs=psmt.executeQuery();
+			while(rs.next()) { //while문이 제대로 안 돼서 오류났었음
+				WineVO vo=new WineVO();
+				vo.setNo(rs.getInt(1));
+				vo.setName(rs.getString(2));
 				//String country=rs.getString(3);
 				//String type=rs.getString(4);
 				//int sweet=rs.getInt(5);
 				//int body=rs.getInt(6);
-				int price=rs.getInt(7);
-				String company=rs.getString(8);
+				vo.setPrice(rs.getInt(7));
+				vo.setCompany(rs.getString(8));
 				//int vintage=rs.getInt(9);
 				//String food=rs.getString(10);
 				
-				vo=new WineVO(no, name1, price, company);
-				
+				vec.add(vo);
 			}
-		} catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			dbClose(con, psmt, rs);
